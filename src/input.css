@@ -1,0 +1,122 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default;
+}
+@plugin "tailwind-scrollbar-hide";
+
+
+
+@theme {
+    --color-blue: #004C97;
+    --color-red: #ED2228;
+    --color-yellow: #78dcca;
+    --color-dark: #2D2D2D;
+    --color-light: #626262;
+  }
+
+body{
+    background-color: #F8F9FB;
+    --swiper-navigation-color:#000;
+    --swiper-theme-color:#000;
+    --swiper-navigation-size:22px;
+}
+
+.roboto {
+    font-family: "Roboto", sans-serif;
+  }
+
+  .swiper {
+    height: 100%;
+  }
+  
+  .swiper-slide {
+    height: auto !important;
+  }
+ .swiper .card  {
+  height: 100% !important
+  }
+
+ .swiper-pagination-bullet {
+      width: 28px;
+      height: 6px;
+      border-radius: 2px
+  }
+  .swiper-pagination-bullet.swiper-pagination-bullet-active{
+    background-color:  #ED2228;
+  }
+ 
+
+  .section3-grid-items .text-center.space-y-1{
+    @apply max-sm:w-[33%]
+  }
+
+  /* .swiper-button-next::after, .swiper-button-prev::after {
+    content: "";
+} */
+.timeline-list {
+  position: relative;
+  margin-left: 0px;
+  padding-left: 0;
+}
+
+.timeline-list li {
+  position: relative;
+  padding-left: 40px;
+  color: white;
+  font-size: 1rem;
+  padding-bottom: 20px;
+}
+
+.timeline-list li::before {
+  content: '';
+  position: absolute;
+  top: 0; /* ensures it stays at the start of the list item */
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid #0e2a32;
+  z-index: 1;
+}
+
+/* Vertical line between dots */
+.timeline-list li::after {
+  content: '';
+  position: absolute;
+  top: 20px; /* start just after the circle */
+  left: 9px; /* center under the circle */
+  width: 2px;
+  height: 100%;
+  background-color: white;
+  z-index: 0;
+}
+
+/* Remove line after last item */
+.timeline-list li:last-child::after {
+  content: none;
+}
+
+
+
+.navigation.pagination {
+    @apply flex flex-wrap justify-center gap-2 text-gray-700;
+  }
+
+
+  
+
+  
+table td{
+    border: 1px solid #D3D3D3;
+    padding: 20px;
+  }
+  table th{
+    border: 1px solid #D3D3D3;
+    padding: 20px;
+  }
+
+
+  [x-cloak]{
+    display: none !important;
+  }
