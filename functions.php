@@ -8,3 +8,9 @@ function my_theme_enqueue_styles() {
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 
   
+
+
+function register_custom_menus() {
+    register_nav_menu('top-links', 'Top Header Links');
+}
+add_action('init', 'register_custom_menus');

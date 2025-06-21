@@ -47,23 +47,28 @@
                   href="https://wa.me/918220350233?text=START%20REGISTRATION"
                   class="bg-red-600 px-4 py-3 rounded text-white hover:bg-red-700 transition uppercase w-fit">Register Now</a>
               </li>
-              <li>
-                <a href="<?php echo site_url(); ?>/ticket-details" class="uppercase">Registration Tariff</a>
-              </li>
-              <li>
-                <a href="<?php echo site_url(); ?>/workshops-poster-presentation" class="uppercase">Workshops & Poster Presentation</a>
-              </li>
+              <?php
+              wp_nav_menu(array(
+                'theme_location' => 'top-links',
+                'container' => false,
+                'items_wrap' => '%3$s', // This removes the outer <ul>
+                'menu_class' => '',      // Optional
+                'link_before' => '<span class="uppercase">',
+                'link_after'  => '</span>',
+                'fallback_cb' => false
+              ));
+              ?>
 
             </ul>
           </div>
         </div>
         <div class="w-full flex justify-center items-center">
           <a href="<?php echo site_url(); ?>">
-            <!-- <img
+            <img
 
-        src="<?php echo esc_url(wp_upload_dir()['baseurl']); ?>/2025/05/header-logo.png"
-        class="h-10 min-[360px]:h-12 sm:h-14 w-auto md:h-16"
-        alt="Logo" /> -->
+              src="<?php echo esc_url(wp_upload_dir()['baseurl']); ?>/2025/05/header-logo.png"
+              class="h-10 min-[360px]:h-12 sm:h-14 w-auto md:h-16"
+              alt="Logo" />
           </a>
         </div>
         <div class="absolute hidden lg:block lg:pr-16 end-0">
@@ -76,12 +81,28 @@
       </div>
 
 
-      <div class="bg-blue text-white max-lg:hidden">
-        <nav class="flex justify-center items-center py-4 gap-10 text-md px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16">
+      <!-- <div class="bg-blue text-white max-lg:hidden">
+        <nav class="flex justify-center items-center py-3 text-sm gap-10 text-md px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16">
           <a href="<?php echo site_url(); ?>/ticket-details" class="uppercase">Registration Tariff</a>
           <a href="<?php echo site_url(); ?>/workshops-poster-presentation" class="uppercase">Workshops & Poster Presentation</a>
         </nav>
+      </div> -->
+
+
+      <div class="bg-blue text-white max-lg:hidden">
+        <?php
+        wp_nav_menu(array(
+          'theme_location' => 'top-links',
+          'container' => 'nav',
+          'container_class' => 'flex justify-center items-center py-3 text-sm gap-10 text-md px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16',
+          'menu_class' => 'flex gap-10',
+          'link_before' => '<span class="uppercase">',
+          'link_after'  => '</span>',
+          'fallback_cb' => false
+        ));
+        ?>
       </div>
+
 
       <!-- <div class="navbar bg-blue  text-white shadow-sm">
 
