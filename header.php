@@ -64,11 +64,11 @@
         </div>
         <div class="w-full flex justify-center items-center">
           <a href="<?php echo site_url(); ?>">
-            <!-- <img
+            <img
 
               src="<?php echo esc_url(wp_upload_dir()['baseurl']); ?>/2025/05/header-logo.png"
               class="h-10 min-[360px]:h-12 sm:h-14 w-auto md:h-16"
-              alt="Logo" /> -->
+              alt="Logo" />
           </a>
         </div>
         <div class="absolute hidden lg:block lg:pr-16 end-0">

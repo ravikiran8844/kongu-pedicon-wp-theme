@@ -11,7 +11,7 @@
               />
             </div>
             <div class="flex gap-1 items-center">
-              <a href="#">
+              <a  href="https://www.facebook.com/profile.php?id=61566458168266" target="_blank">
                 <svg
                   class="h-8"
                   xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@
                   />
                 </svg>
               </a>
-              <a href="#">
+              <!-- <a href="#">
                 <svg
                   class="h-8"
                   xmlns="http://www.w3.org/2000/svg"
@@ -50,8 +50,8 @@
                     fill="#D5D8DA"
                   />
                 </svg>
-              </a>
-              <a href="#">
+              </a> -->
+              <a href="https://www.instagram.com/kongupedicon2025/" target="_blank">
                 <svg
                   class="h-8"
                   xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@
                   />
                 </svg>
               </a>
-              <a href="#">
+              <!-- <a href="#">
                 <svg
                   class="h-8"
                   xmlns="http://www.w3.org/2000/svg"
@@ -108,8 +108,8 @@
                     fill="#082233"
                   />
                 </svg>
-              </a>
-              <a href="#">
+              </a> -->
+              <!-- <a href="#">
                 <svg
                   class="h-8"
                   xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +129,7 @@
                     fill="#082233"
                   />
                 </svg>
-              </a>
+              </a> -->
             </div>
           </div>
 

@@ -9,19 +9,18 @@ get_header();
 <main class="bg-white">
   <section class="py-12 px-4 md:px-8">
     <div class="text-center mb-10">
-      <h2 class="text-2xl md:text-3xl font-bold text-blue-800">Get In Touch</h2>
-      <p class="text-gray-600 max-w-xl mx-auto mt-2">
-        We’ll create high-quality linkable content and build at least 40 high-authority links to each asset,
-        paving the way for you to grow your rankings, improve brand.
+      <h2 class="text-2xl md:text-3xl font-bold text-blue-800 mb-4">Reach out to us</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+      Whether you have a query, feedback, or would like to connect professionally — we’re here to assist you. Please feel free to reach out via the form below or use the contact details provided.
       </p>
     </div>
 
     <div class="bg-[#EBEEF0] border border-[#C7C7C7] rounded-md shadow-md max-w-6xl mx-auto p-6 md:p-10">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
         <!-- Contact Info -->
         <div class="bg-blue text-white rounded-md p-4 md:p-6 flex flex-col justify-between">
           <div>
-            <h3 class="text-xl font-semibold mb-4">We’d love to help</h3>
+            <h3 class="text-xl font-semibold mb-4">We value your time and insights.</h3>
             <p class="mb-6">We’re a full service agency with experts ready to help. We’ll get in touch within 24 hours.</p>
             <div class="space-y-4 text-sm lg:text-md">
               <div class="flex items-start gap-2">
