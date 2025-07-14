@@ -24,44 +24,53 @@
     <div class="relative">
 
       <div class="navbar bg-white shadow-sm py-2 px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16 relative">
-        <div class="absolute lg:hidden">
-          <div class="dropdown">
-            <div tabindex="0" role="button" class="btn btn-ghost btn-circle !bg-white">
-              <svg
-                class="w-6 h-6 text-gray-700"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </div>
-            <ul
-              tabindex="0"
-              class="menu menu-sm dropdown-content bg-white rounded-box z-2 space-y-3 mt-4 w-64 p-2 shadow">
+        <div class="absolute lg:hidden" x-data="{mobileMenuOpen: false}">
+          <div class="relative">
+            <button
+              id="mobileMenuBtn"
+              @click="mobileMenuOpen = !mobileMenuOpen"
+              class="btn btn-ghost btn-circle !bg-white"
+              aria-label="Toggle Menu">
+              <template x-if="mobileMenuOpen">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6">
+                  <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                </svg>
+              </template>
+
+              <template x-if="!mobileMenuOpen">
+                <svg class="h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </template>
+
+
+            </button>
+
+            <ul x-show="mobileMenuOpen" x-cloak @click.away="mobileMenuOpen = false"
+              id="mobileMenu"
+              class="bg-white rounded-box z-50 mt-4 w-64 p-4 shadow space-y-3 absolute left-0 top-full text-sm text-gray-800">
+
               <li>
                 <a
                   target="_blank"
                   href="https://wa.me/918220350233?text=START%20REGISTRATION"
-                  class="bg-red-600 px-4 py-3 rounded text-white hover:bg-red-700 transition uppercase w-fit">Register Now</a>
+                  class="block bg-red-600 px-4 py-3 rounded text-white hover:bg-red-700 transition uppercase w-fit">Register Now</a>
               </li>
+
               <?php
               wp_nav_menu(array(
                 'theme_location' => 'top-links',
                 'container' => false,
-                'items_wrap' => '%3$s', // This removes the outer <ul>
-                'menu_class' => '',      // Optional
-                'link_before' => '<span class="uppercase">',
-                'link_after'  => '</span>',
+                'items_wrap' => '%3$s',
+                'walker' => new Mobile_Dropdown_Walker(),
                 'fallback_cb' => false
               ));
               ?>
-
             </ul>
           </div>
         </div>
+
         <div class="w-full flex justify-center items-center">
           <a href="<?php echo site_url(); ?>">
             <img
@@ -80,211 +89,86 @@
 
       </div>
 
+      <nav class="bg-blue text-white max-lg:hidden">
+        <?php
+        wp_nav_menu(array(
+          'theme_location' => 'top-links',
+          'container' => false,
+          'menu_class' => 'flex justify-center items-center py-3 text-sm gap-5 text-md px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16',
+          'fallback_cb' => false,
+          'walker' => new Custom_Dropdown_Walker()
+        ));
+        ?>
+      </nav>
+
 
       <!-- <div class="bg-blue text-white max-lg:hidden">
-        <nav class="flex justify-center items-center py-3 text-sm gap-10 text-md px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16">
-          <a href="<?php echo site_url(); ?>/ticket-details" class="uppercase">Registration Tariff</a>
-          <a href="<?php echo site_url(); ?>/workshops-poster-presentation" class="uppercase">Workshops & Poster Presentation</a>
-        </nav>
-      </div> -->
-
-
-      <div class="bg-blue text-white max-lg:hidden">
         <?php
         wp_nav_menu(array(
           'theme_location' => 'top-links',
           'container' => 'nav',
           'container_class' => 'flex justify-center items-center py-3 text-sm gap-10 text-md px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16',
-          'menu_class' => 'flex gap-10',
+          'menu_class' => 'flex gap-5',
           'link_before' => '<span class="uppercase">',
           'link_after'  => '</span>',
           'fallback_cb' => false
         ));
         ?>
-      </div>
-
-
-      <!-- <div class="navbar bg-blue  text-white shadow-sm">
-
-            <div class="navbar-center hidden lg:flex justify-center w-full" >
-              <ul class="menu menu-horizontal px-1">
-              
-
-                <li x-data="{ open: false }" class="relative" @click.away="open = false">
-                  <button @click="open = !open" class="flex items-center gap-1 uppercase">
-                  About
-                    <svg
-                      :class="{'rotate-180': open}"
-                      class="w-4 h-4 transition-transform duration-200"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                  </button>
-
-                  <ul
-                    x-show="open" x-cloak
-                    x-transition
-                    class="absolute left-0 top-full p-2 z-50 min-w-[200px] bg-blue shadow rounded">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                  </ul>
-                </li>
-
-                <li x-data="{ open: false }" class="relative" @click.away="open = false">
-                  <button @click="open = !open" class="flex items-center gap-1 uppercase">
-                  Conference
-                    <svg
-                      :class="{'rotate-180': open}"
-                      class="w-4 h-4 transition-transform duration-200"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                  </button>
-
-                  <ul
-                    x-show="open" x-cloak
-                    x-transition
-                    class="absolute left-0 top-full p-2 z-50 min-w-[200px] bg-blue shadow rounded">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                  </ul>
-                </li>
-
-                <li x-data="{ open: false }" class="relative" @click.away="open = false">
-                  <button @click="open = !open" class="flex items-center gap-1 uppercase">
-                  Program
-                    <svg
-                      :class="{'rotate-180': open}"
-                      class="w-4 h-4 transition-transform duration-200"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                  </button>
-
-                  <ul
-                    x-show="open" x-cloak
-                    x-transition
-                    class="absolute left-0 top-full p-2 z-50 min-w-[200px] bg-blue shadow rounded">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                  </ul>
-                </li>
-
-                <li x-data="{ open: false }" class="relative" @click.away="open = false">
-                  <button @click="open = !open" class="flex items-center gap-1 uppercase">
-                  Abstract
-                    <svg
-                      :class="{'rotate-180': open}"
-                      class="w-4 h-4 transition-transform duration-200"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                  </button>
-
-                  <ul
-                    x-show="open" x-cloak
-                    x-transition
-                    class="absolute left-0 top-full p-2 z-50 min-w-[200px] bg-blue shadow rounded">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                  </ul>
-                </li>
-
-                <li x-data="{ open: false }" class="relative" @click.away="open = false">
-                  <button @click="open = !open" class="flex items-center gap-1 uppercase">
-                  Workshop
-                    <svg
-                      :class="{'rotate-180': open}"
-                      class="w-4 h-4 transition-transform duration-200"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                  </button>
-
-                  <ul
-                    x-show="open" x-cloak
-                    x-transition
-                    class="absolute left-0 top-full p-2 z-50 min-w-[200px] bg-blue shadow rounded">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                  </ul>
-                </li>
-
-
-                <li x-data="{ open: false }" class="relative" @click.away="open = false">
-                  <button @click="open = !open" class="flex items-center gap-1 uppercase">
-                  Accomodaion & Travel
-                    <svg
-                      :class="{'rotate-180': open}"
-                      class="w-4 h-4 transition-transform duration-200"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                  </button>
-
-                  <ul
-                    x-show="open" x-cloak
-                    x-transition
-                    class="absolute left-0 top-full p-2 z-50 min-w-[200px] bg-blue shadow rounded">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                  </ul>
-                </li>
-
-                <li x-data="{ open: false }" class="relative" @click.away="open = false">
-                  <button @click="open = !open" class="flex items-center gap-1 uppercase">
-                  More
-                    <svg
-                      :class="{'rotate-180': open}"
-                      class="w-4 h-4 transition-transform duration-200"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                  </button>
-
-                  <ul
-                    x-show="open" x-cloak
-                    x-transition
-                    class="absolute left-0 top-full p-2 z-50 min-w-[200px] bg-blue shadow rounded">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                  </ul>
-                </li>
-
-              
-              </ul>
-            </div>
-
-
-
-          </div> -->
+      </div> -->
     </div>
   </header>
+
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const toggles = document.querySelectorAll(".dropdown-toggle");
+
+      toggles.forEach(toggle => {
+        toggle.addEventListener("click", function(e) {
+          const parent = toggle.parentElement;
+          const submenu = parent.querySelector(".dropdown-menu");
+          const icon = toggle.querySelector(".caret-icon");
+
+          if (submenu) {
+            e.preventDefault(); // Prevent only if there's a submenu
+
+            // Close others
+            document.querySelectorAll(".dropdown-menu").forEach(menu => {
+              if (menu !== submenu) menu.classList.add("hidden");
+            });
+            document.querySelectorAll(".caret-icon").forEach(i => {
+              if (i !== icon) i.classList.remove("rotate-180");
+            });
+
+            // Toggle current
+            submenu.classList.toggle("hidden");
+            icon?.classList.toggle("rotate-180");
+          }
+          // Else: allow normal anchor click to proceed
+        });
+      });
+
+      // Optional: Click outside to close dropdown
+      document.addEventListener("click", function(e) {
+        if (!e.target.closest(".dropdown-toggle")) {
+          document.querySelectorAll(".dropdown-menu").forEach(menu => menu.classList.add("hidden"));
+          document.querySelectorAll(".caret-icon").forEach(i => i.classList.remove("rotate-180"));
+        }
+      });
+    });
+  </script>
+
+
+  <!-- <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    // Toggle full mobile menu
+    mobileMenuBtn?.addEventListener("click", () => {
+      mobileMenu?.classList.toggle("hidden");
+    });
+
+  });
+</script> -->

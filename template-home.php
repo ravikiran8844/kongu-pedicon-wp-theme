@@ -906,12 +906,20 @@ get_header();
 
     <section class="px-4 sm:px-6 py-8 md:p-10 lg:p-12 xl:p-16">
       <div>
-        <img
+        <!-- <img
           loading="lazy"
           src="<?php echo esc_url( wp_upload_dir()['baseurl'] ); ?>/2025/05/map.jpg"
           class="w-full h-auto min-h-[300px] object-center object-cover rounded-2xl"
           alt=""
-        />
+        /> -->
+
+
+        <iframe
+        src="https://www.google.com/maps?q=codissia%20coimbatore&output=embed"
+        class="w-full h-96 rounded-md border-0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </section>
 </main>
