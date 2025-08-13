@@ -20,12 +20,6 @@ get_header();
                     committee members
                 </div>
             </div>
-            <!-- <div class="breadcrumbs text-sm">
-                <ul class="flex justify-center">
-                    <li><a href="/" class="text-white">Emerald</a></li>
-                    <li class="text-white">Services</li>
-                </ul>
-            </div> -->
         </div>
     </section>
     <div class="px-4 sm:px-6 py-4 md:px-10 lg:px-12 xl:px-16 bg-white shadow-sm">
@@ -54,14 +48,63 @@ get_header();
                 ];
             }
 
+
+
+
+            $memberBlocks = get_sub_field('members_blocks') ?: [];
+            $blockData = [];
+
+            foreach ($memberBlocks as $block) {
+                // Initialize arrays for nested repeaters
+                $membersData = [];
+                $membersListData = [];
+
+                // Extract members repeater subfields if exist
+                if (!empty($block['members'])) {
+                    foreach ($block['members'] as $member) {
+                        // Assuming $member has subfields, e.g. 'name', 'role'
+                        $membersData[] = [
+                            'name' => $member['name'],
+                            'type' => $member['type'],
+                            'img' => $member['image']
+                        ];
+                    }
+                }
+
+                // Extract members_list repeater subfields if exist
+                if (!empty($block['members_list'])) {
+                    foreach ($block['members_list'] as $memberListItem) {
+                        // Assuming $memberListItem has subfields, e.g. 'item', 'description'
+                        $membersListData[] = [
+                            'name' => $memberListItem['name']
+                            // Add more subfields as needed
+                        ];
+                    }
+                }
+
+                $blockData[] = [
+                    'title' => $block['title'] ?? '',
+                    'members' => $membersData,
+                    'members_list' => $membersListData
+                ];
+            }
+
+
+
+
             $tabs[] = [
                 'id' => $section_id,
                 'label' => $section_label,
                 'svg' => $svg_icon, // ✅ Now this is defined
-                'members' => $member_list
+                'members' => $member_list,
+                'members_blocks' => $blockData
             ];
         endwhile;
     endif;
+
+
+
+
     ?>
 
 
@@ -119,6 +162,68 @@ get_header();
                                     </div>
                                 </template>
                             </div>
+
+
+
+
+
+
+
+                            <!-- New: Render members_blocks per section -->
+                            <div class="space-y-12 max-w-4xl" x-show="section.members_blocks && section.members_blocks.length > 0">
+                                <template x-for="(block, blockIndex) in section.members_blocks" :key="blockIndex">
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-8 mt-4">
+                                            <h3 class="text-blue text-xl font-bold mb-0" x-text="block.title"></h3>
+                                            <div class="flex-grow h-0.25 bg-[#D5D8DA]"></div>
+                                        </div>
+
+
+
+
+
+
+
+                                        <!-- Block Members -->
+                                        <template x-if="block.members && block.members.length > 0">
+                                            <div class="mb-8">
+                                                <!-- <h4 class="font-medium mb-2">Members</h4> -->
+
+
+                                                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                                    <template x-for="(member, mIndex) in block.members" :key="mIndex">
+                                                        <div class="text-center space-y-1">
+                                                            <img :src="member.img" alt="user" class="max-w-32 lg:max-h-48 mx-auto">
+                                                            <div class="text-red-600 font-medium text-sm" x-text="member.name"></div>
+                                                            <div class="text-gray-700 text-sm" x-text="member.type"></div>
+                                                        </div>
+                                                    </template>
+                                                </div>
+
+                                            </div>
+                                        </template>
+
+                                        <!-- Block Members List -->
+                                        <template x-if="block.members_list && block.members_list.length > 0">
+                                            <div class="bg-[#EAEAEA] border border-[#C6C6C5] rounded-lg p-4">
+                                                <h4 class="font-medium mb-2 text-center text-[#ED2228] text-lg">Members</h4>
+                                                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+
+                                                    <template x-for="(item, iIndex) in block.members_list" :key="iIndex">
+                                                        <div class="text-sm md:text-md" x-text="item.name"></div>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+                            </div>
+
+
+
+
+
+
                         </div>
                     </template>
                 </div>

@@ -6,7 +6,7 @@ get_header();
 ?>
 
 <main class="min-h-screen">
-<section>
+  <section>
       <div class="swiper" id="main-slider">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
